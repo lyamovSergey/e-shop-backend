@@ -47,13 +47,14 @@ export class AuthController {
 
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
-  @Post('login/access-token')
+  @Post('login/update-tokens')
   async getNewTokens(
     @Req() req: RequestWithCookies,
     @Res({ passthrough: true }) res: Response,
   ) {
     const refreshTokenFromCookies =
       req.cookies[this.authService.REFRESH_TOKEN_NAME];
+
     if (!refreshTokenFromCookies) {
       this.authService.removeRefreshTokenFromResponse(res);
       throw new UnauthorizedException('Invalid refresh token');
@@ -74,6 +75,7 @@ export class AuthController {
 
   @Get('google')
   @UseGuards(AuthGuard('google'))
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async googleAuth(@Req() _req) {}
 
   @Get('google/callback')

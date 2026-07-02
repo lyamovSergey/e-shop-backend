@@ -1,0 +1,18 @@
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  email     String  @unique
+  password  String?
+
+  name     String @default("No name")
+  picture  String @default("/uploads/empty-user.png")
+
+  stores    Store[]
+  favorites  Product[]
+  reviews    Review[]
+  orders     Order[]
+
+  @@map("users")
+}

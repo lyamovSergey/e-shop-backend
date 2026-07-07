@@ -8,12 +8,14 @@ import {
 import { UserService } from './user.service';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from './decorators/user.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Auth()
+  @ApiBearerAuth()
   @Get('me')
   async getMe(@CurrentUser('id') id: string) {
     const user = await this.userService.getUserById(id);

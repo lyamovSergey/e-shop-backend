@@ -75,9 +75,8 @@ export class AuthController {
 
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async googleAuth(@Req() _req) {}
-
+  // async googleAuth(@Req() _req) {}
+  async googleAuth() {}
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   async googleAuthCallback(

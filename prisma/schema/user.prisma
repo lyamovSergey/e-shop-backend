@@ -3,16 +3,16 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  email     String  @unique
-  password  String?
+  email    String  @unique
+  password String?
 
-  name     String @default("No name")
-  picture  String @default("/uploads/empty-user.png")
+  name    String @default("No name")
+  picture String @default("/uploads/no-profile-picture-icon.webp")
 
   stores    Store[]
-  favorites  Product[]
-  reviews    Review[]
-  orders     Order[]
+  favorites Product[]
+  reviews   Review[]
+  orders    Order[]
 
   @@map("users")
 }

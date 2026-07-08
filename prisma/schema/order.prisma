@@ -6,12 +6,10 @@ model Order {
   status EnumOrderStatus @default(PENDING)
   total  Int
 
-  items  OrderItem[]
+  items OrderItem[]
 
-  user   User?  @relation(fields: [userId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id])
   userId String? @map("user_id")
-
-
 
   @@map("orders")
 }
@@ -24,15 +22,14 @@ model OrderItem {
   quantity Int
   price    Int
 
-  order   Order?  @relation(fields: [orderId], references: [id])
-  orderId String? @map("order_id")
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String @map("order_id")
 
-  product   Product?  @relation(fields: [productId], references: [id])
-  productId String? @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @map("product_id")
 
-  store   Store?  @relation(fields: [storeId], references: [id])
-  storeId String? @map("store_id")
-
+  store   Store  @relation(fields: [storeId], references: [id])
+  storeId String @map("store_id")
 
   @@map("order_items")
 }

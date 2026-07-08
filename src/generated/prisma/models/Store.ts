@@ -342,6 +342,11 @@ export type StoreNullableScalarRelationFilter = {
   isNot?: Prisma.StoreWhereInput | null
 }
 
+export type StoreScalarRelationFilter = {
+  is?: Prisma.StoreWhereInput
+  isNot?: Prisma.StoreWhereInput
+}
+
 export type StoreCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -417,12 +422,10 @@ export type StoreCreateNestedOneWithoutOrderItemsInput = {
   connect?: Prisma.StoreWhereUniqueInput
 }
 
-export type StoreUpdateOneWithoutOrderItemsNestedInput = {
+export type StoreUpdateOneRequiredWithoutOrderItemsNestedInput = {
   create?: Prisma.XOR<Prisma.StoreCreateWithoutOrderItemsInput, Prisma.StoreUncheckedCreateWithoutOrderItemsInput>
   connectOrCreate?: Prisma.StoreCreateOrConnectWithoutOrderItemsInput
   upsert?: Prisma.StoreUpsertWithoutOrderItemsInput
-  disconnect?: Prisma.StoreWhereInput | boolean
-  delete?: Prisma.StoreWhereInput | boolean
   connect?: Prisma.StoreWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.StoreUpdateWithoutOrderItemsInput>, Prisma.StoreUncheckedUpdateWithoutOrderItemsInput>
 }

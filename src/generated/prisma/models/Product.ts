@@ -459,9 +459,9 @@ export type ProductOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type ProductNullableScalarRelationFilter = {
-  is?: Prisma.ProductWhereInput | null
-  isNot?: Prisma.ProductWhereInput | null
+export type ProductScalarRelationFilter = {
+  is?: Prisma.ProductWhereInput
+  isNot?: Prisma.ProductWhereInput
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -518,6 +518,11 @@ export type ProductMinOrderByAggregateInput = {
 
 export type ProductSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
+}
+
+export type ProductNullableScalarRelationFilter = {
+  is?: Prisma.ProductWhereInput | null
+  isNot?: Prisma.ProductWhereInput | null
 }
 
 export type ProductCreateNestedManyWithoutCategoryInput = {
@@ -610,12 +615,10 @@ export type ProductCreateNestedOneWithoutOrderItemsInput = {
   connect?: Prisma.ProductWhereUniqueInput
 }
 
-export type ProductUpdateOneWithoutOrderItemsNestedInput = {
+export type ProductUpdateOneRequiredWithoutOrderItemsNestedInput = {
   create?: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemsInput, Prisma.ProductUncheckedCreateWithoutOrderItemsInput>
   connectOrCreate?: Prisma.ProductCreateOrConnectWithoutOrderItemsInput
   upsert?: Prisma.ProductUpsertWithoutOrderItemsInput
-  disconnect?: Prisma.ProductWhereInput | boolean
-  delete?: Prisma.ProductWhereInput | boolean
   connect?: Prisma.ProductWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.ProductUpdateWithoutOrderItemsInput>, Prisma.ProductUncheckedUpdateWithoutOrderItemsInput>
 }

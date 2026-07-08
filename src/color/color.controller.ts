@@ -27,7 +27,7 @@ export class ColorController {
   @Auth()
   @Get('by-id/:colorId')
   async getById(@Param('colorId') colorId: string) {
-    return this.colorService.getColorById(colorId);
+    return this.colorService.getById(colorId);
   }
 
   @UsePipes(new ValidationPipe())
@@ -35,7 +35,7 @@ export class ColorController {
   @Auth()
   @Post(':storeId')
   async createColor(@Param('storeId') storeId: string, @Body() dto: ColorDto) {
-    return await this.colorService.createColor(storeId, dto);
+    return await this.colorService.create(storeId, dto);
   }
 
   @UsePipes(new ValidationPipe())
@@ -43,13 +43,13 @@ export class ColorController {
   @Auth()
   @Put(':colorId')
   async updateStore(@Body() dto: ColorDto, @Param('colorId') colorId: string) {
-    return await this.colorService.updateColor(colorId, dto);
+    return await this.colorService.update(colorId, dto);
   }
 
   @HttpCode(200)
   @Auth()
   @Delete(':colorId')
   async deleteStore(@Param('colorId') colorId: string) {
-    return await this.colorService.deleteColor(colorId);
+    return await this.colorService.delete(colorId);
   }
 }

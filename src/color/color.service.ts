@@ -14,7 +14,7 @@ export class ColorService {
     });
   }
 
-  async getColorById(id: string) {
+  async getById(id: string) {
     const color = await this.prisma.color.findUnique({
       where: { id },
     });
@@ -22,22 +22,22 @@ export class ColorService {
     return color;
   }
 
-  async createColor(storeId: string, dto: ColorDto) {
+  async create(storeId: string, dto: ColorDto) {
     return await this.prisma.color.create({
       data: { ...dto, storeId },
     });
   }
 
-  async updateColor(id: string, dto: ColorDto) {
-    await this.getColorById(id);
+  async update(id: string, dto: ColorDto) {
+    await this.getById(id);
     return await this.prisma.color.update({
       where: { id },
       data: dto,
     });
   }
 
-  async deleteColor(id: string) {
-    await this.getColorById(id);
+  async delete(id: string) {
+    await this.getById(id);
     return this.prisma.color.delete({
       where: { id },
     });

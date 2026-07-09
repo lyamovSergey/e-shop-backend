@@ -16,8 +16,35 @@ export class ReviewService {
         storeId,
       },
       select: {
-        user: true,
+        id: true,
+        text: true,
+        rating: true,
+        user: {
+          select: {
+            name: true,
+            picture: true,
+          },
+        },
+        product: {
+          select: {
+            title: true,
+            id: true,
+          },
+        },
       },
+
+      // include: {
+      //   user: {
+      //     select: {
+      //       name: true,
+      //       picture: true,
+      //     },
+      //   },
+      // },
+
+      // select: {
+      //   user: true,
+      // },
     });
   }
 

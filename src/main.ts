@@ -13,8 +13,8 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('E-shop')
+    .setDescription('The e-shop API description')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

@@ -6,6 +6,7 @@ import {
   HttpCode,
   Param,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -27,11 +28,11 @@ export class ReviewController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Auth()
-  @Post(':productId/:storeId')
+  @Post('/add')
   async create(
     @CurrentUser('id') userId: string,
-    @Param('productId') productId: string,
-    @Param('storeId') storeId: string,
+    @Query('productId') productId: string,
+    @Query('storeId') storeId: string,
     @Body() dto: ReviewDto,
   ) {
     return await this.reviewService.create(userId, productId, storeId, dto);

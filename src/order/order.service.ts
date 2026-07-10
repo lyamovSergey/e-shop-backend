@@ -1,10 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { OrderDto } from './dto/order.dto';
+import { StripeService } from 'src/stripe/stripe.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class OrderService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly stripeService: StripeService,
+    private readonly configService: ConfigService,
+  ) {}
 
   async createPayment(dto: OrderDto, userId: string) {
     const orderItems = dto.items.map((item) => ({
@@ -41,7 +47,31 @@ export class OrderService {
       },
     });
 
-    const payment = `Тут будет логика страйпа ${order.id}`;
+    const payment = this.stripeService.client.checkout.sessions.create({
+      mode: 'payment',
+      line_items: dto.items.map((item) => ({
+        price_data: {
+          currency: 'uah',
+          product_data: {
+            name: item.title,
+          },
+          unit_amount: item.price * 100,
+        },
+        quantity: item.quantity,
+      })),
+      success_url: `${this.configService.get('CLIENT_URL')}/payment/success`,
+      cancel_url: `${this.configService.get('CLIENT_URL')}/cart`,
+      metadata: {
+        orderId: order.id,
+      },
+    });
+    return payment;
+  }
+  async createPaymentTest() {
+    const payment = this.stripeService.client.paymentIntents.create({
+      amount: 20000,
+      currency: 'uah',
+    });
     return payment;
   }
 }

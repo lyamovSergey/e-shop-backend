@@ -10,6 +10,7 @@ import { OrderModule } from './order/order.module';
 import { StatisticsModule } from './statistics/statistics.module';
 import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
+import { StripeModule } from './stripe/stripe.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,6 +24,7 @@ import { ReviewModule } from './review/review.module';
     StatisticsModule,
     ProductModule,
     ReviewModule,
+    StripeModule,
   ],
 })
 export class AppModule {}

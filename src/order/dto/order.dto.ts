@@ -27,6 +27,9 @@ export class OrderItemDto {
   @IsNumber({}, { message: 'quantity must be a number' })
   quantity: number;
 
+  @IsString({ message: 'title must be a string' })
+  title: string;
+
   @IsNumber({}, { message: 'price must be a number' })
   price: number;
 

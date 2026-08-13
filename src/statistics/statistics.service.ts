@@ -70,7 +70,7 @@ export class StatisticsService {
     });
 
     const formatDate = (date: Date): string => {
-      return dayjs(date).format('DD.MMM.YYYY');
+      return dayjs(date).format('DD-MMM-YYYY');
     };
 
     const salesByDate = new Map<string, number>();

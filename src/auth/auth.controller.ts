@@ -15,6 +15,7 @@ import { AuthService, type GoogleRequest } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import type { Request, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { Auth } from 'src/auth/decorators/auth.decorator';
 
 export interface RequestWithCookies extends Request {
   cookies: Record<string, string | undefined>;
@@ -89,5 +90,11 @@ export class AuthController {
     return res.redirect(
       `${process.env.CLIENT_URL}/auth/callback?accessToken=${response.accessToken}`,
     );
+  }
+
+  @Auth()
+  @Get('validate-token')
+  validateToken() {
+    return true;
   }
 }

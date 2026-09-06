@@ -23,10 +23,15 @@ export * from './enums.js';
  */
 export type Category = Prisma.CategoryModel
 /**
- * Model Color
+ * Model Filter
  * 
  */
-export type Color = Prisma.ColorModel
+export type Filter = Prisma.FilterModel
+/**
+ * Model FilterValue
+ * 
+ */
+export type FilterValue = Prisma.FilterValueModel
 /**
  * Model Order
  * 
@@ -42,6 +47,11 @@ export type OrderItem = Prisma.OrderItemModel
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model ProductFilterValue
+ * 
+ */
+export type ProductFilterValue = Prisma.ProductFilterValueModel
 /**
  * Model Review
  * 

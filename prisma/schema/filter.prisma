@@ -1,0 +1,29 @@
+model Filter {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name  String
+  value String
+
+  values FilterValue[]
+
+  categoryId String?   @map("category_id")
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  @@map("filters")
+}
+
+model FilterValue {
+  id    String @id @default(cuid())
+  value String
+
+  filterId String @map("filter_id")
+  filter   Filter @relation(fields: [filterId], references: [id], onDelete: Cascade)
+
+  products ProductFilterValue[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("filter_values")
+}

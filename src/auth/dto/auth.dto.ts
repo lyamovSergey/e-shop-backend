@@ -1,4 +1,5 @@
 import { IsString, MinLength, IsOptional, IsEmail } from 'class-validator';
+import { EnumUserRole } from 'src/generated/prisma/enums';
 export class AuthDto {
   @IsOptional()
   @IsString()
@@ -17,4 +18,5 @@ export class AuthDto {
     message: 'Password is required',
   })
   password: string;
+  role?: EnumUserRole;
 }

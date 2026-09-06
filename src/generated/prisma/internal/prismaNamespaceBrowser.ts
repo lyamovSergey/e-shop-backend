@@ -52,10 +52,12 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Category: 'Category',
-  Color: 'Color',
+  Filter: 'Filter',
+  FilterValue: 'FilterValue',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Product: 'Product',
+  ProductFilterValue: 'ProductFilterValue',
   Review: 'Review',
   Store: 'Store',
   User: 'User'
@@ -89,16 +91,26 @@ export const CategoryScalarFieldEnum = {
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
-export const ColorScalarFieldEnum = {
+export const FilterScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   name: 'name',
   value: 'value',
-  storeId: 'storeId'
+  categoryId: 'categoryId'
 } as const
 
-export type ColorScalarFieldEnum = (typeof ColorScalarFieldEnum)[keyof typeof ColorScalarFieldEnum]
+export type FilterScalarFieldEnum = (typeof FilterScalarFieldEnum)[keyof typeof FilterScalarFieldEnum]
+
+
+export const FilterValueScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  filterId: 'filterId',
+  createdAt: 'createdAt'
+} as const
+
+export type FilterValueScalarFieldEnum = (typeof FilterValueScalarFieldEnum)[keyof typeof FilterValueScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {
@@ -137,11 +149,18 @@ export const ProductScalarFieldEnum = {
   images: 'images',
   storeId: 'storeId',
   categoryId: 'categoryId',
-  colorId: 'colorId',
   userId: 'userId'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ProductFilterValueScalarFieldEnum = {
+  productId: 'productId',
+  filterValueId: 'filterValueId'
+} as const
+
+export type ProductFilterValueScalarFieldEnum = (typeof ProductFilterValueScalarFieldEnum)[keyof typeof ProductFilterValueScalarFieldEnum]
 
 
 export const ReviewScalarFieldEnum = {
@@ -177,7 +196,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   name: 'name',
-  picture: 'picture'
+  picture: 'picture',
+  role: 'role'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

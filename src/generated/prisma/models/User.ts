@@ -32,6 +32,7 @@ export type UserMinAggregateOutputType = {
   password: string | null
   name: string | null
   picture: string | null
+  role: $Enums.EnumUserRole | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -42,6 +43,7 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   name: string | null
   picture: string | null
+  role: $Enums.EnumUserRole | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type UserCountAggregateOutputType = {
   password: number
   name: number
   picture: number
+  role: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type UserMinAggregateInputType = {
   password?: true
   name?: true
   picture?: true
+  role?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type UserMaxAggregateInputType = {
   password?: true
   name?: true
   picture?: true
+  role?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type UserCountAggregateInputType = {
   password?: true
   name?: true
   picture?: true
+  role?: true
   _all?: true
 }
 
@@ -167,6 +173,7 @@ export type UserGroupByOutputType = {
   password: string | null
   name: string
   picture: string
+  role: $Enums.EnumUserRole
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -198,6 +205,7 @@ export type UserWhereInput = {
   password?: Prisma.StringNullableFilter<"User"> | string | null
   name?: Prisma.StringFilter<"User"> | string
   picture?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumEnumUserRoleFilter<"User"> | $Enums.EnumUserRole
   stores?: Prisma.StoreListRelationFilter
   favorites?: Prisma.ProductListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -212,6 +220,7 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   picture?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   stores?: Prisma.StoreOrderByRelationAggregateInput
   favorites?: Prisma.ProductOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
@@ -229,6 +238,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringNullableFilter<"User"> | string | null
   name?: Prisma.StringFilter<"User"> | string
   picture?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumEnumUserRoleFilter<"User"> | $Enums.EnumUserRole
   stores?: Prisma.StoreListRelationFilter
   favorites?: Prisma.ProductListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -243,6 +253,7 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   picture?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -259,6 +270,7 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   picture?: Prisma.StringWithAggregatesFilter<"User"> | string
+  role?: Prisma.EnumEnumUserRoleWithAggregatesFilter<"User"> | $Enums.EnumUserRole
 }
 
 export type UserCreateInput = {
@@ -269,6 +281,7 @@ export type UserCreateInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreCreateNestedManyWithoutUserInput
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
@@ -283,6 +296,7 @@ export type UserUncheckedCreateInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
@@ -297,6 +311,7 @@ export type UserUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
@@ -311,6 +326,7 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -325,6 +341,7 @@ export type UserCreateManyInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
 }
 
 export type UserUpdateManyMutationInput = {
@@ -335,6 +352,7 @@ export type UserUpdateManyMutationInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -345,6 +363,7 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -360,6 +379,7 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   name?: Prisma.SortOrder
   picture?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -370,6 +390,7 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   name?: Prisma.SortOrder
   picture?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -380,6 +401,7 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   name?: Prisma.SortOrder
   picture?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutOrdersInput = {
@@ -446,6 +468,10 @@ export type UserUpdateOneWithoutStoresNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoresInput, Prisma.UserUpdateWithoutStoresInput>, Prisma.UserUncheckedUpdateWithoutStoresInput>
 }
 
+export type EnumEnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.EnumUserRole
+}
+
 export type UserCreateWithoutOrdersInput = {
   id?: string
   createdAt?: Date | string
@@ -454,6 +480,7 @@ export type UserCreateWithoutOrdersInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreCreateNestedManyWithoutUserInput
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
@@ -467,6 +494,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
@@ -496,6 +524,7 @@ export type UserUpdateWithoutOrdersInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
@@ -509,6 +538,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -522,6 +552,7 @@ export type UserCreateWithoutFavoritesInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
@@ -535,6 +566,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
@@ -564,6 +596,7 @@ export type UserUpdateWithoutFavoritesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
@@ -577,6 +610,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -590,6 +624,7 @@ export type UserCreateWithoutReviewsInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreCreateNestedManyWithoutUserInput
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
@@ -603,6 +638,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
@@ -632,6 +668,7 @@ export type UserUpdateWithoutReviewsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
@@ -645,6 +682,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -658,6 +696,7 @@ export type UserCreateWithoutStoresInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
@@ -671,6 +710,7 @@ export type UserUncheckedCreateWithoutStoresInput = {
   password?: string | null
   name?: string
   picture?: string
+  role?: $Enums.EnumUserRole
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
@@ -700,6 +740,7 @@ export type UserUpdateWithoutStoresInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
@@ -713,6 +754,7 @@ export type UserUncheckedUpdateWithoutStoresInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -784,6 +826,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   name?: boolean
   picture?: boolean
+  role?: boolean
   stores?: boolean | Prisma.User$storesArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
@@ -799,6 +842,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   name?: boolean
   picture?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -809,6 +853,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   name?: boolean
   picture?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -819,9 +864,10 @@ export type UserSelectScalar = {
   password?: boolean
   name?: boolean
   picture?: boolean
+  role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "email" | "password" | "name" | "picture", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "email" | "password" | "name" | "picture" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stores?: boolean | Prisma.User$storesArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
@@ -848,6 +894,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string | null
     name: string
     picture: string
+    role: $Enums.EnumUserRole
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1282,6 +1329,7 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly picture: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'EnumUserRole'>
 }
     
 

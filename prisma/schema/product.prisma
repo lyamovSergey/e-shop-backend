@@ -1,27 +1,36 @@
 model Product {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   title       String
   description String
   price       Int
   images      String[]
 
-  store       Store?   @relation(fields: [storeId], references: [id])
-  storeId     String?  @map("store_id")
+  store   Store?  @relation(fields: [storeId], references: [id])
+  storeId String? @map("store_id")
 
-  category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  String?   @map("category_id")
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?   @map("category_id")
 
-  color       Color?    @relation(fields: [colorId], references: [id])
-  colorId     String?   @map("color_id")
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @map("user_id")
 
-  user        User?     @relation(fields: [userId], references: [id])
-  userId      String?   @map("user_id")
-
-  reviews     Review[]
+  reviews      Review[]
   orderItems   OrderItem[]
+  filterValues ProductFilterValue[]
 
   @@map("products")
+}
+
+model ProductFilterValue {
+  productId     String
+  filterValueId String
+
+  product     Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  filterValue FilterValue @relation(fields: [filterValueId], references: [id], onDelete: Cascade)
+
+  @@id([productId, filterValueId])
+  @@map("product_filters")
 }

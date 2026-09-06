@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { ColorModule } from './color/color.module';
 import { CategoryModule } from './category/category.module';
 import { FileModule } from './file/file.module';
 import { StoreModule } from './store/store.module';
@@ -16,7 +15,6 @@ import { StripeModule } from './stripe/stripe.module';
     ConfigModule.forRoot(),
     AuthModule,
     UserModule,
-    ColorModule,
     CategoryModule,
     FileModule,
     StoreModule,

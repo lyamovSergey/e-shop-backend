@@ -6,8 +6,9 @@ model User {
   email    String  @unique
   password String?
 
-  name    String @default("No name")
-  picture String @default("/uploads/no-profile-picture-icon.webp")
+  name    String       @default("No name")
+  picture String       @default("/uploads/no-profile-picture-icon.webp")
+  role    EnumUserRole @default(USER)
 
   stores    Store[]
   favorites Product[]
@@ -15,4 +16,10 @@ model User {
   orders    Order[]
 
   @@map("users")
+}
+
+enum EnumUserRole {
+  ADMIN
+  SALER
+  USER
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AuthDto } from 'src/auth/dto/auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { hash } from 'argon2';
+import { EnumUserRole } from 'src/generated/prisma/enums';
 
 @Injectable()
 export class UserService {
@@ -56,6 +57,7 @@ export class UserService {
         name: dto.name,
         email: dto.email,
         password: await hash(dto.password),
+        role: dto.role ? dto.role : EnumUserRole.USER,
       },
     });
   }

@@ -11,9 +11,11 @@ import { AuthDto } from './dto/auth.dto';
 import { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { GoogleUser } from './strategies/google.strategy';
+import { EnumUserRole } from 'src/generated/prisma/enums';
 
 export interface JwtPayload {
   id: string;
+  role: EnumUserRole;
 }
 export type GoogleRequest = Request & {
   user: GoogleUser;
@@ -53,8 +55,11 @@ export class AuthService {
     return { user, ...tokens };
   }
 
-  createTokens(userId: string) {
-    const data: JwtPayload = { id: userId };
+  createTokens(userId: string, userRole?: EnumUserRole) {
+    const data: JwtPayload = {
+      id: userId,
+      role: userRole || EnumUserRole.USER,
+    };
     const accessToken = this.jwt.sign(data, {
       expiresIn: '1h',
     });
@@ -77,6 +82,7 @@ export class AuthService {
           email: req.user.email,
           name: req.user.name,
           picture: req.user.picture,
+          role: EnumUserRole.USER,
         },
         include: {
           stores: true,

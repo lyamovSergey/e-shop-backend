@@ -9,10 +9,12 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Category.js'
-export type * from './models/Color.js'
+export type * from './models/Filter.js'
+export type * from './models/FilterValue.js'
 export type * from './models/Order.js'
 export type * from './models/OrderItem.js'
 export type * from './models/Product.js'
+export type * from './models/ProductFilterValue.js'
 export type * from './models/Review.js'
 export type * from './models/Store.js'
 export type * from './models/User.js'

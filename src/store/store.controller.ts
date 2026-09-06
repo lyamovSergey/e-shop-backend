@@ -15,12 +15,15 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/user/decorators/user.decorator';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
+import { Roles } from 'src/auth/decorators/role.decorator';
+import { EnumUserRole } from 'src/generated/prisma/enums';
 
 @Controller('store')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
   @Auth()
+  @Roles(EnumUserRole.ADMIN)
   @Get('list')
   async getStoreList(@CurrentUser('id') userId: string) {
     return await this.storeService.getStoreList(userId);

@@ -47,7 +47,6 @@ export class ProductService {
       },
       include: {
         category: true,
-        color: true,
       },
     });
   }
@@ -57,7 +56,6 @@ export class ProductService {
       where: { id },
       include: {
         category: true,
-        color: true,
         reviews: true,
       },
     });

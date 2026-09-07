@@ -6,5 +6,5 @@ export class CreateStoreDto {
   })
   title: string;
   description: string;
-  logo: string[];
+  logo: string;
 }

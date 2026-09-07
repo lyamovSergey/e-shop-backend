@@ -34,7 +34,7 @@ export class AuthService {
 
   async login(dto: AuthDto) {
     const user = await this.validateUser(dto);
-    const tokens = this.createTokens(user.id);
+    const tokens = this.createTokens(user.id, user.role);
     return { user, ...tokens };
   }
 
@@ -72,7 +72,9 @@ export class AuthService {
   private async validateUser(dto: AuthDto) {
     const user = await this.userService.getUserByEmail(dto.email);
     if (!user) throw new NotFoundException('User not found');
-    return user;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userFields } = user;
+    return userFields;
   }
   async validateOAuthLogin(req: GoogleRequest) {
     let user = await this.userService.getUserByEmail(req.user.email);
@@ -85,7 +87,7 @@ export class AuthService {
           role: EnumUserRole.USER,
         },
         include: {
-          stores: true,
+          store: true,
           favorites: true,
           orders: true,
         },

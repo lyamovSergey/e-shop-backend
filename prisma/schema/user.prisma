@@ -10,7 +10,7 @@ model User {
   picture String       @default("/uploads/no-profile-picture-icon.webp")
   role    EnumUserRole @default(USER)
 
-  stores    Store[]
+  store     Store?
   favorites Product[]
   reviews   Review[]
   orders    Order[]

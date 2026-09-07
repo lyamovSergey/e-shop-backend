@@ -12,7 +12,7 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
-        stores: true,
+        store: true,
         favorites: true,
         orders: true,
       },
@@ -24,7 +24,7 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: { email },
       include: {
-        stores: true,
+        store: true,
         favorites: true,
         orders: true,
       },
@@ -36,9 +36,7 @@ export class UserService {
     const user = await this.getUserById(userId);
     if (!user) return false;
 
-    const isExists = user?.favorites.some(
-      (product) => product.id === productId,
-    );
+    const isExists = user.favorites.some((product) => product.id === productId);
 
     await this.prisma.user.update({
       where: { id: user.id },

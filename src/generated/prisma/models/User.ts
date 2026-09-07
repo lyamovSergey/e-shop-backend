@@ -206,7 +206,7 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   picture?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumEnumUserRoleFilter<"User"> | $Enums.EnumUserRole
-  stores?: Prisma.StoreListRelationFilter
+  store?: Prisma.XOR<Prisma.StoreNullableScalarRelationFilter, Prisma.StoreWhereInput> | null
   favorites?: Prisma.ProductListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   orders?: Prisma.OrderListRelationFilter
@@ -221,7 +221,7 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   picture?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  stores?: Prisma.StoreOrderByRelationAggregateInput
+  store?: Prisma.StoreOrderByWithRelationInput
   favorites?: Prisma.ProductOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
@@ -239,7 +239,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   picture?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumEnumUserRoleFilter<"User"> | $Enums.EnumUserRole
-  stores?: Prisma.StoreListRelationFilter
+  store?: Prisma.XOR<Prisma.StoreNullableScalarRelationFilter, Prisma.StoreWhereInput> | null
   favorites?: Prisma.ProductListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   orders?: Prisma.OrderListRelationFilter
@@ -282,7 +282,7 @@ export type UserCreateInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreCreateNestedOneWithoutUserInput
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
@@ -297,7 +297,7 @@ export type UserUncheckedCreateInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
@@ -312,7 +312,7 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUpdateOneWithoutUserNestedInput
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
@@ -327,7 +327,7 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
@@ -452,20 +452,20 @@ export type UserUpdateOneWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
 }
 
-export type UserCreateNestedOneWithoutStoresInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStoresInput, Prisma.UserUncheckedCreateWithoutStoresInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoresInput
+export type UserCreateNestedOneWithoutStoreInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoreInput, Prisma.UserUncheckedCreateWithoutStoreInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoreInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneWithoutStoresNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStoresInput, Prisma.UserUncheckedCreateWithoutStoresInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoresInput
-  upsert?: Prisma.UserUpsertWithoutStoresInput
+export type UserUpdateOneWithoutStoreNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoreInput, Prisma.UserUncheckedCreateWithoutStoreInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoreInput
+  upsert?: Prisma.UserUpsertWithoutStoreInput
   disconnect?: Prisma.UserWhereInput | boolean
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoresInput, Prisma.UserUpdateWithoutStoresInput>, Prisma.UserUncheckedUpdateWithoutStoresInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoreInput, Prisma.UserUpdateWithoutStoreInput>, Prisma.UserUncheckedUpdateWithoutStoreInput>
 }
 
 export type EnumEnumUserRoleFieldUpdateOperationsInput = {
@@ -481,7 +481,7 @@ export type UserCreateWithoutOrdersInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreCreateNestedOneWithoutUserInput
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
@@ -495,7 +495,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
@@ -525,7 +525,7 @@ export type UserUpdateWithoutOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUpdateOneWithoutUserNestedInput
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
@@ -539,7 +539,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -553,7 +553,7 @@ export type UserCreateWithoutFavoritesInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreCreateNestedOneWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
@@ -567,7 +567,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreUncheckedCreateNestedOneWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
@@ -597,7 +597,7 @@ export type UserUpdateWithoutFavoritesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUpdateOneWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
@@ -611,7 +611,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUncheckedUpdateOneWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -625,7 +625,7 @@ export type UserCreateWithoutReviewsInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreCreateNestedOneWithoutUserInput
   favorites?: Prisma.ProductCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
@@ -639,7 +639,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   name?: string
   picture?: string
   role?: $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedCreateNestedManyWithoutUserInput
+  store?: Prisma.StoreUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.ProductUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
@@ -669,7 +669,7 @@ export type UserUpdateWithoutReviewsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUpdateOneWithoutUserNestedInput
   favorites?: Prisma.ProductUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
@@ -683,12 +683,12 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   picture?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumEnumUserRoleFieldUpdateOperationsInput | $Enums.EnumUserRole
-  stores?: Prisma.StoreUncheckedUpdateManyWithoutUserNestedInput
+  store?: Prisma.StoreUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.ProductUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutStoresInput = {
+export type UserCreateWithoutStoreInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -702,7 +702,7 @@ export type UserCreateWithoutStoresInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutStoresInput = {
+export type UserUncheckedCreateWithoutStoreInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -716,23 +716,23 @@ export type UserUncheckedCreateWithoutStoresInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutStoresInput = {
+export type UserCreateOrConnectWithoutStoreInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutStoresInput, Prisma.UserUncheckedCreateWithoutStoresInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoreInput, Prisma.UserUncheckedCreateWithoutStoreInput>
 }
 
-export type UserUpsertWithoutStoresInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutStoresInput, Prisma.UserUncheckedUpdateWithoutStoresInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutStoresInput, Prisma.UserUncheckedCreateWithoutStoresInput>
+export type UserUpsertWithoutStoreInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoreInput, Prisma.UserUncheckedUpdateWithoutStoreInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoreInput, Prisma.UserUncheckedCreateWithoutStoreInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutStoresInput = {
+export type UserUpdateToOneWithWhereWithoutStoreInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutStoresInput, Prisma.UserUncheckedUpdateWithoutStoresInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoreInput, Prisma.UserUncheckedUpdateWithoutStoreInput>
 }
 
-export type UserUpdateWithoutStoresInput = {
+export type UserUpdateWithoutStoreInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -746,7 +746,7 @@ export type UserUpdateWithoutStoresInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutStoresInput = {
+export type UserUncheckedUpdateWithoutStoreInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -766,14 +766,12 @@ export type UserUncheckedUpdateWithoutStoresInput = {
  */
 
 export type UserCountOutputType = {
-  stores: number
   favorites: number
   reviews: number
   orders: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stores?: boolean | UserCountOutputTypeCountStoresArgs
   favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
   reviews?: boolean | UserCountOutputTypeCountReviewsArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
@@ -787,13 +785,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountStoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StoreWhereInput
 }
 
 /**
@@ -827,7 +818,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   picture?: boolean
   role?: boolean
-  stores?: boolean | Prisma.User$storesArgs<ExtArgs>
+  store?: boolean | Prisma.User$storeArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
@@ -869,7 +860,7 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "email" | "password" | "name" | "picture" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stores?: boolean | Prisma.User$storesArgs<ExtArgs>
+  store?: boolean | Prisma.User$storeArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
@@ -881,7 +872,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    stores: Prisma.$StorePayload<ExtArgs>[]
+    store: Prisma.$StorePayload<ExtArgs> | null
     favorites: Prisma.$ProductPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
@@ -1289,7 +1280,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  stores<T extends Prisma.User$storesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  store<T extends Prisma.User$storeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storeArgs<ExtArgs>>): Prisma.Prisma__StoreClient<runtime.Types.Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1723,9 +1714,9 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.stores
+ * User.store
  */
-export type User$storesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$storeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Store
    */
@@ -1739,11 +1730,6 @@ export type User$storesArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   include?: Prisma.StoreInclude<ExtArgs> | null
   where?: Prisma.StoreWhereInput
-  orderBy?: Prisma.StoreOrderByWithRelationInput | Prisma.StoreOrderByWithRelationInput[]
-  cursor?: Prisma.StoreWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.StoreScalarFieldEnum | Prisma.StoreScalarFieldEnum[]
 }
 
 /**

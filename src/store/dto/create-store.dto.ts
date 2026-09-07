@@ -5,4 +5,6 @@ export class CreateStoreDto {
     message: 'Title is required and must be a string',
   })
   title: string;
+  description: string;
+  logo: string[];
 }

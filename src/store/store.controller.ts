@@ -5,8 +5,8 @@ import {
   Get,
   HttpCode,
   Param,
+  Patch,
   Post,
-  Put,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -23,10 +23,16 @@ export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
   @Auth()
-  @Roles(EnumUserRole.ADMIN)
   @Get('list')
   async getStoreList(@CurrentUser('id') userId: string) {
     return await this.storeService.getStoreList(userId);
+  }
+
+  @Auth()
+  @Roles(EnumUserRole.ADMIN)
+  @Get('full-list')
+  async getStoreListFull() {
+    return await this.storeService.getStoreListFull();
   }
 
   @Auth()
@@ -52,7 +58,7 @@ export class StoreController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Auth()
-  @Put('update/:id')
+  @Patch('update/:id')
   async updateStore(
     @CurrentUser('id') userId: string,
     @Body() dto: UpdateStoreDto,

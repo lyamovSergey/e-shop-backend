@@ -13,6 +13,10 @@ export class StoreService {
     });
   }
 
+  async getStoreListFull() {
+    return await this.prisma.store.findMany();
+  }
+
   async getStoreById(storeId: string, userId: string) {
     const store = await this.prisma.store.findUnique({
       where: { id: storeId, userId },
@@ -25,6 +29,8 @@ export class StoreService {
     return await this.prisma.store.create({
       data: {
         title: dto.title,
+        description: dto.description,
+        logo: dto.logo,
         userId,
       },
     });
@@ -35,8 +41,7 @@ export class StoreService {
     return await this.prisma.store.update({
       where: { id: storeId },
       data: {
-        title: dto.title,
-        description: dto.description,
+        ...dto,
       },
     });
   }

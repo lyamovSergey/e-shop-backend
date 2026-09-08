@@ -16,6 +16,7 @@ import { EnumUserRole } from 'src/generated/prisma/enums';
 export interface JwtPayload {
   id: string;
   role: EnumUserRole;
+  storeId?: string;
 }
 export type GoogleRequest = Request & {
   user: GoogleUser;
@@ -34,7 +35,7 @@ export class AuthService {
 
   async login(dto: AuthDto) {
     const user = await this.validateUser(dto);
-    const tokens = this.createTokens(user.id, user.role);
+    const tokens = this.createTokens(user.id, user.role, user?.store?.id);
     return { user, ...tokens };
   }
 
@@ -55,10 +56,11 @@ export class AuthService {
     return { user, ...tokens };
   }
 
-  createTokens(userId: string, userRole?: EnumUserRole) {
+  createTokens(userId: string, userRole?: EnumUserRole, storeId?: string) {
     const data: JwtPayload = {
       id: userId,
       role: userRole || EnumUserRole.USER,
+      storeId,
     };
     const accessToken = this.jwt.sign(data, {
       expiresIn: '1h',

@@ -1,10 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CategoryDto } from './dto/category.dto';
+import { EnumUserRole } from 'src/generated/prisma/enums';
 
 @Injectable()
 export class CategoryService {
   constructor(private readonly prisma: PrismaService) {}
+
+  async getAll() {
+    return this.prisma.category.findMany();
+  }
 
   async getByStoreId(storeId: string) {
     return this.prisma.category.findMany({
@@ -22,22 +31,44 @@ export class CategoryService {
     return category;
   }
 
-  async createCategory(storeId: string, dto: CategoryDto) {
+  async createCategory(dto: CategoryDto, storeId?: string) {
     return await this.prisma.category.create({
-      data: { ...dto, storeId },
+      data: { ...dto, ...(storeId && { storeId: storeId }) },
     });
   }
 
-  async updateCategory(id: string, dto: CategoryDto) {
-    await this.getCategoryById(id);
+  async updateCategory(
+    id: string,
+    dto: CategoryDto,
+    userRole: EnumUserRole,
+    storeId: string | undefined,
+  ) {
+    const category = await this.getCategoryById(id);
+    if (!category) throw new NotFoundException('Category not found');
+    if (
+      userRole !== EnumUserRole.ADMIN &&
+      (userRole !== EnumUserRole.SALER || category.storeId !== storeId)
+    )
+      throw new ForbiddenException('Error permissions!');
     return await this.prisma.category.update({
       where: { id },
-      data: dto,
+      data: { ...dto },
     });
   }
 
-  async deleteCategory(id: string) {
-    await this.getCategoryById(id);
+  async deleteCategory(
+    id: string,
+    storeId: string | undefined,
+    userRole: EnumUserRole,
+  ) {
+    const category = await this.getCategoryById(id);
+    if (!category) throw new NotFoundException('Category not found');
+    if (
+      userRole !== EnumUserRole.ADMIN &&
+      (userRole !== EnumUserRole.SALER || category.storeId !== storeId)
+    )
+      throw new ForbiddenException('Error permissions!');
+
     return this.prisma.category.delete({
       where: { id },
     });

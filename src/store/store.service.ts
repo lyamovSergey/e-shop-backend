@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
+import { EnumUserRole } from 'src/generated/prisma/enums';
 
 @Injectable()
 export class StoreService {
@@ -14,14 +15,26 @@ export class StoreService {
   }
 
   async getStoreListFull() {
-    return await this.prisma.store.findMany();
+    return await this.prisma.store.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
   }
 
-  async getStoreById(storeId: string, userId: string) {
+  async getStoreById(storeId: string, userId: string, userRole: EnumUserRole) {
     const store = await this.prisma.store.findUnique({
-      where: { id: storeId, userId },
+      where: { id: storeId },
     });
-    if (!store) throw new NotFoundException('Store not found');
+
+    if (!store || (userRole !== EnumUserRole.ADMIN && store.userId !== userId))
+      throw new NotFoundException('Store not found');
+
     return store;
   }
 
@@ -36,8 +49,13 @@ export class StoreService {
     });
   }
 
-  async updateStore(storeId: string, userId: string, dto: UpdateStoreDto) {
-    await this.getStoreById(storeId, userId);
+  async updateStore(
+    storeId: string,
+    userId: string,
+    userRole: EnumUserRole,
+    dto: UpdateStoreDto,
+  ) {
+    await this.getStoreById(storeId, userId, userRole);
     return await this.prisma.store.update({
       where: { id: storeId },
       data: {
@@ -46,8 +64,8 @@ export class StoreService {
     });
   }
 
-  async deleteStore(storeId: string, userId: string) {
-    await this.getStoreById(storeId, userId);
+  async deleteStore(storeId: string, userId: string, userRole: EnumUserRole) {
+    await this.getStoreById(storeId, userId, userRole);
     return this.prisma.store.delete({
       where: { id: storeId },
     });

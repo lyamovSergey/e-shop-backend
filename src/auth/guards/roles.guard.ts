@@ -22,9 +22,10 @@ export class RolesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest<RequestWithUser>();
     const user = request.user;
+
     if (!user?.role) {
       return false;
     }
-    return roles.includes(user.role as EnumUserRole);
+    return roles.includes(user.role);
   }
 }

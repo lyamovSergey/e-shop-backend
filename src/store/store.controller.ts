@@ -40,8 +40,9 @@ export class StoreController {
   async getStoreById(
     @Param('id') storeId: string,
     @CurrentUser('id') userId: string,
+    @CurrentUser('role') userRole: EnumUserRole,
   ) {
-    return await this.storeService.getStoreById(storeId, userId);
+    return await this.storeService.getStoreById(storeId, userId, userRole);
   }
 
   @UsePipes(new ValidationPipe())
@@ -61,18 +62,21 @@ export class StoreController {
   @Patch('update/:id')
   async updateStore(
     @CurrentUser('id') userId: string,
+    @CurrentUser('role') userRole: EnumUserRole,
     @Body() dto: UpdateStoreDto,
     @Param('id') storeId: string,
   ) {
-    return await this.storeService.updateStore(storeId, userId, dto);
+    return await this.storeService.updateStore(storeId, userId, userRole, dto);
   }
   @HttpCode(200)
   @Auth()
+  @Roles(EnumUserRole.ADMIN)
   @Delete(':id')
   async deleteStore(
     @CurrentUser('id') userId: string,
+    @CurrentUser('role') userRole: EnumUserRole,
     @Param('id') storeId: string,
   ) {
-    return await this.storeService.deleteStore(storeId, userId);
+    return await this.storeService.deleteStore(storeId, userId, userRole);
   }
 }

@@ -12,6 +12,7 @@ export class CategoryService {
 
   async getAll() {
     return this.prisma.category.findMany({
+      where: { parentId: null },
       include: {
         store: true,
         children: true,
@@ -22,6 +23,9 @@ export class CategoryService {
   async getCategoryById(id: string) {
     const category = await this.prisma.category.findUnique({
       where: { id },
+      include: {
+        children: true,
+      },
     });
     if (!category) throw new NotFoundException('Category not found');
     return category;

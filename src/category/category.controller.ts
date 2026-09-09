@@ -7,25 +7,18 @@ import {
   Param,
   Patch,
   Post,
-  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CategoryDto } from './dto/category.dto';
-import { CurrentUser, UserWithStore } from 'src/user/decorators/user.decorator';
 import { EnumUserRole } from 'src/generated/prisma/enums';
+import { Roles } from 'src/auth/decorators/role.decorator';
 
 @Controller('categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
-
-  @Auth()
-  @Get('by-storeId/:storeId')
-  async getByStoreId(@Param('storeId') storeId: string) {
-    return await this.categoryService.getByStoreId(storeId);
-  }
 
   @Auth()
   @Get('by-id/:categoryId')
@@ -41,44 +34,79 @@ export class CategoryController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Auth()
+  @Roles(EnumUserRole.ADMIN)
   @Post('/create')
-  async createCategory(
-    @Body() dto: CategoryDto,
-    @Query('storeId') storeId?: string,
-  ) {
-    return await this.categoryService.createCategory(dto, storeId);
+  async createCategory(@Body() dto: CategoryDto) {
+    return await this.categoryService.createCategory(dto);
   }
 
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Auth()
+  @Roles(EnumUserRole.ADMIN)
   @Patch(':categoryId')
   async updateCategory(
     @Body() dto: CategoryDto,
     @Param('categoryId') categoryId: string,
-    @CurrentUser('store') store: UserWithStore['store'],
-    @CurrentUser('role') userRole: EnumUserRole,
   ) {
-    return await this.categoryService.updateCategory(
-      categoryId,
-      dto,
-      userRole,
-      store?.id,
-    );
+    return await this.categoryService.updateCategory(categoryId, dto);
   }
 
   @HttpCode(200)
   @Auth()
+  @Roles(EnumUserRole.ADMIN)
   @Delete(':categoryId')
-  async deleteStore(
-    @Param('categoryId') categoryId: string,
-    @CurrentUser('store') store: UserWithStore['store'],
-    @CurrentUser('role') userRole: EnumUserRole,
-  ) {
-    return await this.categoryService.deleteCategory(
-      categoryId,
-      store?.id,
-      userRole,
-    );
+  async deleteStore(@Param('categoryId') categoryId: string) {
+    return await this.categoryService.deleteCategory(categoryId);
   }
+
+  // @Auth()
+  // @Get('by-storeId/:storeId')
+  // async getByStoreId(@Param('storeId') storeId: string) {
+  //   return await this.categoryService.getByStoreId(storeId);
+  // }
+
+  // @UsePipes(new ValidationPipe())
+  // @HttpCode(200)
+  // @Auth()
+  // @Post('/create')
+  // async createCategory(
+  //   @Body() dto: CategoryDto,
+  //   @Query('storeId') storeId?: string,
+  // ) {
+  //   return await this.categoryService.createCategory(dto, storeId);
+  // }
+
+  // @UsePipes(new ValidationPipe())
+  // @HttpCode(200)
+  // @Auth()
+  // @Patch(':categoryId')
+  // async updateCategory(
+  //   @Body() dto: CategoryDto,
+  //   @Param('categoryId') categoryId: string,
+  //   @CurrentUser('store') store: UserWithStore['store'],
+  //   @CurrentUser('role') userRole: EnumUserRole,
+  // ) {
+  //   return await this.categoryService.updateCategory(
+  //     categoryId,
+  //     dto,
+  //     userRole,
+  //     store?.id,
+  //   );
+  // }
+
+  // @HttpCode(200)
+  // @Auth()
+  // @Delete(':categoryId')
+  // async deleteStore(
+  //   @Param('categoryId') categoryId: string,
+  //   @CurrentUser('store') store: UserWithStore['store'],
+  //   @CurrentUser('role') userRole: EnumUserRole,
+  // ) {
+  //   return await this.categoryService.deleteCategory(
+  //     categoryId,
+  //     store?.id,
+  //     userRole,
+  //   );
+  // }
 }

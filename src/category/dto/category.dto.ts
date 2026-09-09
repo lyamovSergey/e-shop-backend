@@ -1,12 +1,21 @@
-import { IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CategoryDto {
   @IsString({
-    message: 'Name is required',
+    message: 'Name must be a string',
   })
+  @IsNotEmpty({ message: 'Name is required' })
   name: string;
+
+  @IsOptional()
   @IsString({
-    message: 'Description is required',
+    message: 'Description must be a string',
   })
-  description: string;
+  description?: string;
+
+  @IsOptional()
+  @IsString({
+    message: 'Parent ID must be a string',
+  })
+  parentId?: string;
 }

@@ -8,8 +8,8 @@ model Product {
   price       Int
   images      String[]
 
-  store   Store?  @relation(fields: [storeId], references: [id])
-  storeId String? @map("store_id")
+  store   Store  @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId String @map("store_id")
 
   category   Category? @relation(fields: [categoryId], references: [id])
   categoryId String?   @map("category_id")

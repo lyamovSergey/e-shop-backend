@@ -425,12 +425,10 @@ export type StoreCreateNestedOneWithoutProductsInput = {
   connect?: Prisma.StoreWhereUniqueInput
 }
 
-export type StoreUpdateOneWithoutProductsNestedInput = {
+export type StoreUpdateOneRequiredWithoutProductsNestedInput = {
   create?: Prisma.XOR<Prisma.StoreCreateWithoutProductsInput, Prisma.StoreUncheckedCreateWithoutProductsInput>
   connectOrCreate?: Prisma.StoreCreateOrConnectWithoutProductsInput
   upsert?: Prisma.StoreUpsertWithoutProductsInput
-  disconnect?: Prisma.StoreWhereInput | boolean
-  delete?: Prisma.StoreWhereInput | boolean
   connect?: Prisma.StoreWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoreUpdateToOneWithWhereWithoutProductsInput, Prisma.StoreUpdateWithoutProductsInput>, Prisma.StoreUncheckedUpdateWithoutProductsInput>
 }

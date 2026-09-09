@@ -11,7 +11,12 @@ export class CategoryService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAll() {
-    return this.prisma.category.findMany();
+    return this.prisma.category.findMany({
+      include: {
+        store: true,
+        children: true,
+      },
+    });
   }
 
   async getCategoryById(id: string) {

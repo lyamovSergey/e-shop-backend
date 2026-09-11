@@ -1210,7 +1210,6 @@ export const FilterScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   name: 'name',
-  value: 'value',
   categoryId: 'categoryId'
 } as const
 
@@ -1219,9 +1218,11 @@ export type FilterScalarFieldEnum = (typeof FilterScalarFieldEnum)[keyof typeof 
 
 export const FilterValueScalarFieldEnum = {
   id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
   value: 'value',
-  filterId: 'filterId',
-  createdAt: 'createdAt'
+  filterId: 'filterId'
 } as const
 
 export type FilterValueScalarFieldEnum = (typeof FilterValueScalarFieldEnum)[keyof typeof FilterValueScalarFieldEnum]

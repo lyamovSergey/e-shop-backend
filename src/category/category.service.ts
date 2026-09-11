@@ -25,6 +25,18 @@ export class CategoryService {
       where: { id },
       include: {
         children: true,
+        filters: {
+          select: {
+            name: true,
+            id: true,
+            data: {
+              select: {
+                value: true,
+                name: true,
+              },
+            },
+          },
+        },
       },
     });
     if (!category) throw new NotFoundException('Category not found');

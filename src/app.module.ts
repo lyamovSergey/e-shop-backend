@@ -10,6 +10,7 @@ import { StatisticsModule } from './statistics/statistics.module';
 import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
 import { StripeModule } from './stripe/stripe.module';
+import { FilterModule } from './filter/filter.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,6 +24,7 @@ import { StripeModule } from './stripe/stripe.module';
     ProductModule,
     ReviewModule,
     StripeModule,
+    FilterModule,
   ],
 })
 export class AppModule {}

@@ -7,7 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserService } from 'src/user/user.service';
-import { AuthDto } from './dto/auth.dto';
+import { AuthRegisterDto, AuthLoginDto } from './dto/auth.dto';
 import { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { GoogleUser } from './strategies/google.strategy';
@@ -33,13 +33,13 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  async login(dto: AuthDto) {
+  async login(dto: AuthLoginDto) {
     const user = await this.validateUser(dto);
     const tokens = this.createTokens(user.id, user.role, user?.store?.id);
     return { user, ...tokens };
   }
 
-  async register(dto: AuthDto) {
+  async register(dto: AuthRegisterDto) {
     const currentUser = await this.userService.getUserByEmail(dto.email);
     if (currentUser) throw new BadRequestException('User already exists');
 
@@ -71,7 +71,7 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  private async validateUser(dto: AuthDto) {
+  private async validateUser(dto: AuthLoginDto) {
     const user = await this.userService.getUserByEmail(dto.email);
     if (!user) throw new NotFoundException('User not found');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

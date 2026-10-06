@@ -12,9 +12,10 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService, type GoogleRequest } from './auth.service';
-import { AuthDto } from './dto/auth.dto';
+import { AuthRegisterDto, AuthLoginDto, AuthResponseDto } from './dto/auth.dto';
 import type { Request, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOkResponse } from '@nestjs/swagger';
 
 export interface RequestWithCookies extends Request {
   cookies: Record<string, string | undefined>;
@@ -26,8 +27,12 @@ export class AuthController {
 
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
+  @ApiOkResponse({ type: AuthResponseDto })
   @Post('Login')
-  async login(@Body() dto: AuthDto, @Res({ passthrough: true }) res: Response) {
+  async login(
+    @Body() dto: AuthLoginDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { refreshToken, ...response } = await this.authService.login(dto);
     this.authService.addRefreshTokenToResponse(res, refreshToken);
     return response;
@@ -35,9 +40,10 @@ export class AuthController {
 
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
+  @ApiOkResponse({ type: AuthResponseDto })
   @Post('register')
   async register(
-    @Body() dto: AuthDto,
+    @Body() dto: AuthRegisterDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const { refreshToken, ...response } = await this.authService.register(dto);

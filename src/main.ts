@@ -2,9 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import cookieParser from 'cookie-parser';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api/v1');
   app.use(cookieParser());
   app.enableCors({
     origin: [process.env.CLIENT_URL],
@@ -19,6 +21,15 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
+  app.use(
+    '/docs',
+    basicAuth({
+      challenge: true,
+      users: {
+        [process.env.SWAGGER_USER!]: process.env.SWAGGER_PASSWORD!,
+      },
+    }),
+  );
   SwaggerModule.setup('docs', app, documentFactory);
   await app.listen(process.env.PORT ?? 5000);
 }
